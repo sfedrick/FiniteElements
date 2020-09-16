@@ -1,0 +1,20 @@
+
+
+x_exact=0:1/m:1;
+
+
+fun=@(x,n) sin(n*pi*x);
+exactn4= fun(x_exact,4);
+hold on;
+exact=@(x,n) interp1(0:1/100:1,fun(0:1/100:1,n),x);
+approx=@(x,n,m) interp1(0:1/m:1,exact(0:1/100:1
+plot(x_exact,exactn4,'DisplayName','Exact','Linewidth',3)
+for n=2:2:10
+    x_approx=0:1/n:1;
+    approx=exact(x_approx,4);
+    plot(x_approx,approx,'DisplayName',"m= "+num2str(n),'Linewidth',3)
+end
+legend
+hold off;
+
+integrand=@(x,n) exact(x)

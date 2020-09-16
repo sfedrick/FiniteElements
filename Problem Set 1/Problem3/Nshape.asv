@@ -1,0 +1,39 @@
+function N=Nshape(domain,index,x)
+    index=index+1;
+    s=length(domain);
+    if(index==1)
+        x1=domain(2);
+        x0=domain(1);
+        for v=1:length(x)
+            if(x0<=x(v)&& x(v)<=x1)
+                N=(x1-x(v))/(x1-x0);
+            else
+                N=[N;0];
+            end 
+        end
+    elseif(index==s-1)
+        xn_1=domain(index);
+        xn=domain(index+1);
+       for v=1:length(x)
+            if(domain(index)<=x(v) && x(v)<=domain(index+1))
+                N=(x(v)-xn_1)/(xn-xn_1);
+            else
+                N=N;
+            end 
+       end 
+    else
+        xi=domain(index);
+        xi_1=domain(index-1);
+        xip1=domain(index+1);
+        for v=1:length(x)
+            if(xi_1<=x(v)&& x(v)<=xi)
+                 N=(x(v)-xi_1)/(xi-xi_1)
+            elseif(xi<=x(v)&& x(v)<=xip1)
+                N=[N;(xip1-x(v))/(xip1-xi)];
+            else
+                N=[N;0];
+            end 
+        end
+    end
+        
+end
